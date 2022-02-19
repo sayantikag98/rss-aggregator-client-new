@@ -4,7 +4,7 @@ import {MatSort} from '@angular/material/sort';
 import { ApiService } from '../services/api.service';
 import {MatTableDataSource} from '@angular/material/table';
 import { FormComponent } from '../form/form.component';
-
+import { Feed } from "../feed.model";
 
 @Component({
   providers: [ApiService],
@@ -64,8 +64,12 @@ export class TableComponent implements OnInit, OnChanges {
     else this.editFeed1();
   }
 
+  checkDuplicate(oldFeedList: Feed[], newFeed: any){
+    return oldFeedList.filter((ele: Feed) => ele.feedUrl === newFeed.feedUrl).length === 0;
+  }
+
   addFeed(){
-    if(this.formcomp.newFeedForm.valid){
+    if(this.formcomp.newFeedForm.valid && this.checkDuplicate(this.dataSource.data, this.formcomp.newFeedForm.value)){
       this.api.postFeed(this.formcomp.newFeedForm.value)
       .subscribe({
         next: res => {
@@ -78,6 +82,9 @@ export class TableComponent implements OnInit, OnChanges {
           alert("Error!!! Feed cannot be added to the database");
         }
       })
+    }
+    else{
+      alert("Data could not be inserted in the database either because no proper data was provided or duplicated data was provided");
     }
   }
 
@@ -94,7 +101,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   // for the update button in the form component
   editFeed1(){
-    if(this.formcomp.newFeedForm.valid){
+    if(this.formcomp.newFeedForm.valid && this.checkDuplicate(this.dataSource.data, this.formcomp.newFeedForm.value)){
       this.api.updateFeed(this.data._id, this.formcomp.newFeedForm.value)
       .subscribe({
         next: res => {
@@ -108,6 +115,9 @@ export class TableComponent implements OnInit, OnChanges {
           alert("Error!!! Feed cannot be updated in the database");
         }
       })
+    }
+    else{
+      alert("Data could not be inserted in the database either because no proper data was provided or duplicated data was provided");
     }
   }
 

@@ -7,7 +7,7 @@
 
 <div id="main-div"> 
   <app-table #tablecomp [formcomp]="formcomp" id="table-component"></app-table>
-  <app-list id="list-component"></app-list>
+  <app-list [tablecomp]="tablecomp" id="list-component"></app-list>
   <app-form #formcomp [tablecomp]="tablecomp" id="form-component"></app-form>
 </div>
 
