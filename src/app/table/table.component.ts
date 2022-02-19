@@ -5,6 +5,7 @@ import { ApiService } from '../services/api.service';
 import {MatTableDataSource} from '@angular/material/table';
 import { FormComponent } from '../form/form.component';
 
+
 @Component({
   providers: [ApiService],
   selector: 'app-table',
@@ -24,6 +25,7 @@ export class TableComponent implements OnInit, OnChanges {
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  
 
 
   constructor(private api:ApiService) {}
@@ -69,7 +71,7 @@ export class TableComponent implements OnInit, OnChanges {
         next: res => {
           console.log(res);
           alert("Feed added successfully to the database");
-          this.formcomp.newFeedForm.reset();
+          setTimeout(() => this.formcomp.formGroupDirective.resetForm(), 0);
           this.ngOnInit();
         },
         error: () => {
@@ -98,7 +100,7 @@ export class TableComponent implements OnInit, OnChanges {
         next: res => {
           console.log(res);
           alert("Feed updated successfully in the database");
-          this.formcomp.newFeedForm.reset();
+          setTimeout(() => this.formcomp.formGroupDirective.resetForm(), 0);
           this.formcomp.actionBtn = "Create";
           this.ngOnInit();
         },

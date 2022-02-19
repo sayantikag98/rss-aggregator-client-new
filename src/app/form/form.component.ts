@@ -1,7 +1,8 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, ViewChild} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { ApiService } from '../services/api.service';
 import { TableComponent } from '../table/table.component';
+import { FormGroupDirective } from '@angular/forms';
 
 @Component({
   providers: [ApiService],
@@ -15,6 +16,7 @@ export class FormComponent implements OnInit {
   actionBtn : string = "Create";
   
   @Input() tablecomp: TableComponent;
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
 
   constructor(private formBuilder: FormBuilder, private api: ApiService) { }
   
