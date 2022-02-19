@@ -1,0 +1,13 @@
+<p>
+  <mat-toolbar color="primary">
+    <span>RSS Feed Aggregator</span>
+  </mat-toolbar>
+</p>
+
+
+<div id="main-div"> 
+  <app-table #tablecomp [formcomp]="formcomp" id="table-component"></app-table>
+  <app-list id="list-component"></app-list>
+  <app-form #formcomp [tablecomp]="tablecomp" id="form-component"></app-form>
+</div>
+

@@ -1,0 +1,58 @@
+<h3 [hidden]="!isEmpty">No feed present</h3>
+
+<div [hidden]="isEmpty" id="table-div">
+    <mat-form-field appearance="standard">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. http://" #input>
+    </mat-form-field>
+      
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+            <!-- Id Column -->
+            <ng-container style="display: none;" matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Id</th>
+                <td id="feed-data-table" mat-cell *matCellDef="let row"> {{row._id}} </td>
+            </ng-container>
+
+    
+            <!-- Feed Column -->
+            <ng-container matColumnDef="feedUrl">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Feed URL </th>
+                <td id="feed-data-table" mat-cell *matCellDef="let row"> {{row.feedUrl}} </td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                <td id="feed-data-table" mat-cell *matCellDef="let row" style="display: flex; "> 
+                   <button mat-icon-button color="primary" (click)="editFeed(row)">
+                       <mat-icon>
+                           edit
+                       </mat-icon>
+                   </button> 
+                   <button mat-icon-button color="warn" (click)="deleteFeed(row)">
+                       <mat-icon>
+                           delete
+                       </mat-icon>
+                   </button>
+                </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No feed data</td>
+            </tr>
+        </table>
+    
+        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator> -->
+        <mat-paginator #paginator [length]="feedList && feedList.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
+        </mat-paginator>
+    </div>
+</div>
+
+
+
+

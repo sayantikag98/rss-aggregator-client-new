@@ -1,0 +1,14 @@
+<div id="input-form-div">
+    <form id="input-form" [formGroup] = "newFeedForm" (ngSubmit)="addOrEditFeed()">
+        <mat-form-field id="feed-url-input" appearance="fill">
+            <mat-label>Enter the Feed URL here</mat-label>
+            <input matInput type="url" formControlName="feedUrl" required>
+        </mat-form-field>
+        <button id="feed-url-submit" mat-raised-button color="primary" type="submit">{{actionBtn}}</button>
+    </form>  
+</div>
+
+
+
+
+
