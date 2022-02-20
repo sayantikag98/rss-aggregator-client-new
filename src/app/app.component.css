@@ -1,24 +1,26 @@
 #main-div{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    grid-auto-rows: minmax(100px, auto);
-    padding: 20px 40px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
 
-
+#main-div-1{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 #table-component{
-    grid-column: 1/5;
-    grid-row: 1;
-}
-
-#list-component{
-    grid-column: 3/5;
-    grid-row: 1;
+    width: 45%;
+    
 }
 
 #form-component{
-    grid-column: 5/5;
-    grid-row: 1;
+    width: 35%;
+}
+
+#header-span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

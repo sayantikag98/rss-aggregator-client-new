@@ -1,0 +1,17 @@
+#list-comp-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#list-comp-div>button{
+    margin: 25px;
+}
+
+#feed-detail-update-btn{
+    background-color:#3F51B5;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: bolder;
+}

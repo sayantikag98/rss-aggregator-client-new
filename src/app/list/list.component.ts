@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { TableComponent } from '../table/table.component';
 import { ApiService } from '../services/api.service';
 import { Detail } from '../detail.model';
@@ -13,7 +13,7 @@ import * as $ from 'jquery';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent implements OnInit{
+export class ListComponent implements OnInit, AfterViewInit{
   
 
   data:any= [];
@@ -22,6 +22,7 @@ export class ListComponent implements OnInit{
 
 
   @Input() tablecomp: TableComponent;
+  @ViewChild('detailbtn') detailbtn:ElementRef;
 
   
 
@@ -31,6 +32,13 @@ export class ListComponent implements OnInit{
   
   ngOnInit(): void {
     this.getFeedDetails();
+  }
+
+  ngAfterViewInit(){
+    setInterval(()=>{
+      this.detailbtn.nativeElement.click();
+    },5000);
+    
   }
 
   getDiffArray(arr1: any, arr2: any){
@@ -77,6 +85,8 @@ export class ListComponent implements OnInit{
   }
 
   renderContent(){
+    const listDiv = document.getElementById("list-comp-div");
+    listDiv?.lastElementChild?.setAttribute("style", "display:block");
     const feedDiv = document.getElementById("feed-detail-div");
     if(feedDiv !== null) feedDiv.remove();
     this.objList = this.objList.sort((a:Detail, b:Detail) => {
@@ -84,20 +94,25 @@ export class ListComponent implements OnInit{
     });
     const feedDetailEle = document.createElement("div");
     feedDetailEle.id = "feed-detail-div";
+    feedDetailEle.style.margin = "30px";
     this.objList.forEach((ele: any) => {
                 const template = `
                     <article>
                       <h1>${ele.feedTitle}</h1>
                       <h2>${ele.feedAuthor}</h2>
-                      <h3>${ele.feedUrl}</h3>
+                      <a href="${ele.feedUrl}" target="_blank">${ele.feedUrl}</a>
                       <h4>${ele.feedDate}</h4>
                       <p>${ele.feedDescription}</p>
                       <hr>
+                      <br>
                     </article>
                   `;
                   feedDetailEle.insertAdjacentHTML("beforeend", template);
               });
+    
+    listDiv?.lastElementChild?.setAttribute("style", "display:none");
     document.body.insertAdjacentElement("beforeend", feedDetailEle);
+    
     
   }
 
