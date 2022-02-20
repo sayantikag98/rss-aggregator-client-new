@@ -33,7 +33,7 @@ export class ApiService {
     return this.http.post("http://localhost:3000/details/", data, {responseType: 'text'});
   }
 
-  deleteAllFeedDetails(){
-    return this.http.delete("http://localhost:3000/details/", {responseType: 'text'});
+  deleteAllFeedDetails(id: any){
+    return this.http.delete(`http://localhost:3000/details/${id}`, {responseType: 'text'});
   }
 }
